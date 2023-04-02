@@ -67,4 +67,6 @@ grant select,insert,update,delete on table SPECIFIC_TABLE_NAME to role identifie
 
 
 
---- reference https://stackoverflow.com/questions/72654388/how-do-i-grant-all-privileges-for-a-database-to-a-role-in-snowflake
+--- reference 
+-- https://stackoverflow.com/questions/72654388/how-do-i-grant-all-privileges-for-a-database-to-a-role-in-snowflake
+-- https://github.com/trevor-higbee/snowflake-tools/tree/master/privileges
