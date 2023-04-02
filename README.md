@@ -1,1 +1,1 @@
-# snowflake-grants-
+# snowflake
