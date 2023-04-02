@@ -46,6 +46,22 @@ grant all on future tables in schema <db.schema> to ROLE <role>;
 This can be extended to views and other objects too.
 
 
+
+grant all privileges on future tables in schema <db.schema> to ROLE <role>;
+
+
+
+
+
+--- all privileges -> Schema, Table, Future objects
+
+grant all privileges on schema identifier($db_schema_name) to role identifier($snowflake_role_name);
+grant all privileges on all tables in schema identifier($db_schema_name) to role identifier($snowflake_role_name);
+grant all privileges on future tables in schema identifier($db_schema_name) to role identifier($snowflake_role_name);
+grant all privileges on all sequences in schema identifier($db_schema_name) to role identifier($snowflake_role_name);
+grant all privileges on future sequences in schema identifier($db_schema_name) to role identifier($snowflake_role_name);
+
+
 --- views
 grant select on all views in schema identifier($db_schema_name) to role identifier($snowflake_role_name);
 grant select on future views in schema identifier($db_schema_name) to role identifier($snowflake_role_name);
