@@ -16,31 +16,25 @@ grant usage on schema identifier($db_schema_name) to role identifier($snowflake_
 
 
 
-3
 
+--- Unfortunately in Snowflake, there is no as such command to grant all access via a single command.
+--- Even with all privileges command, you have to grant one usage privilege against the object to be effective.
+--- For future grants, you can try following commands at schema and database level
 
-Unfortunately in Snowflake, there is no as such command to grant all access via a single command.
+--- SCHEMA LEVEL
 
-Even with all privileges command, you have to grant one usage privilege against the object to be effective.
+grant usage on database SAMPLEDATABASE1 to role identifier($snowflake_role_name);
+grant usage on schema SAMPLEDATABASE1.TEST to role identifier($snowflake_role_name);
+grant select on future tables in schema SAMPLEDATABASE1.TEST to role identifier($snowflake_role_name);
+grant role testrole12 to user SNOWFLAKE_USER;
 
-It's mentioned in the documentation on Schema Privileges as well.
+--- DATABASE LEVEL
+grant usage on database SAMPLEDATABASE1 to role identifier($snowflake_role_name);
+grant usage on future schemas in database SAMPLEDATABASE1 to role identifier($snowflake_role_name);
+grant select on future tables in database SAMPLEDATABASE1 to role identifier($snowflake_role_name);
+grant role testrole12 to user SNOWFLAKE_USER;
 
-For future grants, you can try following commands at schema and database level
-
-SCHEMA LEVEL
-
-grant usage on database SAMPLEDATABASE1 to role testrole12;
-grant usage on schema SAMPLEDATABASE1.TEST to role testrole12;
-grant select on future tables in schema SAMPLEDATABASE1.TEST to role testrole12;
-grant role testrole12 to user SUJANT3;
-DATABASE LEVEL
-
-grant usage on database SAMPLEDATABASE1 to role testrole12;
-grant usage on future schemas in database SAMPLEDATABASE1 to role testrole12;
-grant select on future tables in database SAMPLEDATABASE1 to role testrole12;
-grant role testrole12 to user SUJANT3;
-
-There is no one single command to affect all the objects under the database, but you can run these set of SQL's per object:
+---There is no one single command to affect all the objects under the database, but you can run these set of SQL's per object:
 
 GRANT ALL ON ALL schemas in database <DB> TO ROLE <role>; 
 GRANT ALL ON ALL TABLES IN SCHEMA <db.schema> TO ROLE <role>; 
@@ -73,4 +67,4 @@ grant select,insert,update,delete on table SPECIFIC_TABLE_NAME to role identifie
 
 
 
-
+--- reference https://stackoverflow.com/questions/72654388/how-do-i-grant-all-privileges-for-a-database-to-a-role-in-snowflake
