@@ -7,11 +7,16 @@ set db_name = 'SNOWFLAKE_DB_NAME';
 set db_schema_name = 'SNOWFLAKE_DB_SCHEMA_NAME';
 
 
-grant usage, monitor on database identifier($db_name) to role identifier($snowflake_role_name);
-grant usage, monitor on warehouse identifier($warehouse_name) to role identifier($snowflake_role_name);
-
 use database identifier($db_name);
 
+-- USAGE : 
+--  Grants the ability to execute a USE <object> command on the object. 
+--  Also grants the ability to execute a SHOW <objects> command on the object.
+
+-- MONITOR :
+--  Grants the ability to see details within an object (e.g. queries and usage within a database, warehouse).
+grant usage, monitor on database identifier($db_name) to role identifier($snowflake_role_name);
+grant usage, monitor on warehouse identifier($warehouse_name) to role identifier($snowflake_role_name);
 grant usage on schema identifier($db_schema_name) to role identifier($snowflake_role_name);
 
 
@@ -22,7 +27,6 @@ grant usage on schema identifier($db_schema_name) to role identifier($snowflake_
 --- For future grants, you can try following commands at schema and database level
 
 --- SCHEMA LEVEL
-
 grant usage on database SAMPLEDATABASE1 to role identifier($snowflake_role_name);
 grant usage on schema SAMPLEDATABASE1.TEST to role identifier($snowflake_role_name);
 grant select on future tables in schema SAMPLEDATABASE1.TEST to role identifier($snowflake_role_name);
